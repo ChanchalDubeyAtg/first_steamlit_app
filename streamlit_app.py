@@ -8,5 +8,5 @@ streamlit.text('🥑🍞 Avocado Toast')
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
 import pandas
-my_fruit_list = pandas.read_csv("https://practicejsoncourse.s3.amazonaws.com/nutrition_tweets")
+my_fruit_list = pandas.read_csv("https://s3.console.aws.amazon.com/s3/buckets/practicejsoncourse?region=us-east-1&tab=objects")
 streamlit.dataframe(my_fruit_list)
