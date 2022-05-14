@@ -46,7 +46,7 @@ streamlit.write('The user entered',fruit_choice)
 import requests 
 fruityvice_response = requests.get ("https://fruityvice.com/api/fruit/" + fruit_choice)
 
-pip3 install --upgrade pip
+pip3 install --upgrade pip --user
 import snowflake.connector
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
