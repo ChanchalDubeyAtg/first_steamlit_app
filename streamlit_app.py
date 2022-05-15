@@ -47,6 +47,7 @@ import requests
 fruityvice_response = requests.get ("https://fruityvice.com/api/fruit/" + fruit_choice)
 
 #pip3 install --upgrade pip --user
+pip install -r https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v2.7.6/tested_requirements/requirements_36.reqs
 import snowflake.connector
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
