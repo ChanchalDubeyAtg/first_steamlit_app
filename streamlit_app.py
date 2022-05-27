@@ -35,9 +35,9 @@ streamlit.write('The user entered',fruit_choice)
 #import requests 
 
 
-pip install --upgrade pip --user
-pip install -r https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v2.7.6/tested_requirements/requirements_36.reqs
-streamlit.stop()
+#pip install --upgrade pip --user
+#pip install -r https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v2.7.6/tested_requirements/requirements_36.reqs
+#streamlit.stop()
 
 
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
