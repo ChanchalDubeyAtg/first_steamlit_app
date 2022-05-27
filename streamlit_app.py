@@ -2,8 +2,6 @@ import pandas
 import requests
 import snowflake.connector
 from urllib.error import URLError
-
-
 #import streamlit
 streamlit.title("My Mom\'s New Healthy Diner")
 streamlit.header('Breakfast Favorites')
@@ -13,18 +11,6 @@ streamlit.text('🐔 Hard-Boiled Free-Range Egg')
 streamlit.text('🥑🍞 Avocado Toast')
 streamlit.header('🍌🥭 Build Your Own Fruit Smoothie 🥝🍇')
 
-
-my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
-streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index))
-streamlit.dataframe(my_fruit_list)
-
-#import pandas
-my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
-my_fruit_list = my_fruit_list.set_index('Fruit')
-streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index))
-
-streamlit.dataframe(my_fruit_list)
-
 #import pandas
 my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.com/dabw/fruit_macros.txt")
 my_fruit_list = my_fruit_list.set_index('Fruit')
@@ -32,25 +18,22 @@ streamlit.multiselect("Pick some fruits:", list(my_fruit_list.index),['Avocado',
 
 streamlit.dataframe(my_fruit_list)
 
-
-
- 
-fruityvice_response = requests.get ("https://fruityvice.com/api/fruit/watermelon")
-streamlit.text(fruityvice_response)
-
+#New section to display fruityvice api response
 streamlit.header('Fruityvice Fruit Advice!')
-
-#import requests
-fruityvice_response = requests.get ("https://fruityvice.com/api/fruit/" + "Kiwi")
-streamlit.text(fruityvice_response.json())
-fruityvice_normalized=pandas.json_normalize(fruityvice_response.json())
-streamlit.dataframe(fruityvice_normalized)
-streamlit.header('Fruityvice Fruit Advice!')
-fruit_choice=streamlit.text_input('What fruit would you like information about?','kiwi')
+try:
+ fruit_choice=streamlit.text_input('What fruit would you like information about?','kiwi')
+ if not fruit_choice:
+  streamlit.error("What fruit would you like information about?")
+ else:
+  fruityvice_response = requests.get ("https://fruityvice.com/api/fruit/" + fruit_choice)
+  fruityvice_normalized=pandas.json_normalize(fruityvice_response.json())
+  streamlit.dataframe(fruityvice_normalized)
+except URLError as e:
+ streamlit.error()
 streamlit.write('The user entered',fruit_choice)
 
 #import requests 
-fruityvice_response = requests.get ("https://fruityvice.com/api/fruit/" + fruit_choice)
+
 
 pip install --upgrade pip --user
 pip install -r https://raw.githubusercontent.com/snowflakedb/snowflake-connector-python/v2.7.6/tested_requirements/requirements_36.reqs
